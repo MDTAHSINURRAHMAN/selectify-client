@@ -10,11 +10,12 @@ import PrivateRoute from "./PrivateRoute";
 import AddQuery from "../pages/AddQuery";
 import QueryDetails from "../pages/QueryDetails";
 import UpdateQueryPage from "../pages/UpdateQueryPage";
+import Home from "../pages/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navbar></Navbar>,
+    element: <Home></Home>,
   },
   {
     path: "/queries",

@@ -1,11 +1,11 @@
-import React from 'react';
-import { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 
 const QueryDetails = () => {
     const [query, setQuery] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [recommendations, setRecommendations] = useState([]);
     const { id } = useParams();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -85,6 +85,78 @@ const QueryDetails = () => {
         }
     };
 
+    // Fetch recommendations for this query
+    useEffect(() => {
+        const fetchRecommendations = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/recommendations/${id}`);
+                const data = await response.json();
+                // Sort recommendations by timestamp descending
+                const sortedRecommendations = data.sort(
+                    (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+                );
+                setRecommendations(sortedRecommendations);
+            } catch (error) {
+                console.error('Error fetching recommendations:', error);
+            }
+        };
+
+        if (id) {
+            fetchRecommendations();
+        }
+    }, [id]);
+
+    // Render recommendations
+    const renderRecommendations = () => {
+        if (recommendations.length === 0) {
+            return (
+                <div className="text-center py-8 text-gray-500">
+                    No recommendations yet. Be the first to recommend!
+                </div>
+            );
+        }
+
+        return recommendations.map((rec) => (
+            <div key={rec._id} className="bg-white rounded-lg shadow-md p-6 mb-4">
+                <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                        <img
+                            src={rec.recommenderImage || 'https://i.ibb.co/VqWBk8J/slider1.jpg'} 
+                            alt={rec.recommenderName}
+                            className="w-12 h-12 rounded-full"
+                        />
+                    </div>
+                    <div className="flex-grow">
+                        <div className="flex justify-between items-center mb-2">
+                            <h3 className="text-lg font-semibold text-blue-600">
+                                {rec.recommendationTitle}
+                            </h3>
+                            <span className="text-sm text-gray-500">
+                                {new Date(rec.timestamp).toLocaleDateString()}
+                            </span>
+                        </div>
+                        <p className="text-sm font-medium text-gray-600 mb-2">
+                            By {rec.recommenderName}
+                        </p>
+                        <div className="mb-4">
+                            <img
+                                src={rec.recommendedProductImage}
+                                alt={rec.recommendedProductName}
+                                className="w-full h-48 object-cover rounded-lg"
+                            />
+                        </div>
+                        <p className="text-gray-700 mb-2">
+                            Recommended Product: {rec.recommendedProductName}
+                        </p>
+                        <p className="text-gray-600">
+                            {rec.recommendationReason}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        ));
+    };
+
     if (loading) {
         return <div className="text-center mt-8">Loading...</div>;
     }
@@ -112,7 +184,7 @@ const QueryDetails = () => {
             </div>
 
             {/* Add Recommendation Form */}
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                 <h2 className="text-2xl font-bold mb-6">Add a Recommendation</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
@@ -169,6 +241,12 @@ const QueryDetails = () => {
                         Add Recommendation
                     </button>
                 </form>
+            </div>
+
+            {/* Recommendations List */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+                <h2 className="text-2xl font-bold mb-6">Recommendations</h2>
+                {renderRecommendations()}
             </div>
         </div>
     );
