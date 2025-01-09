@@ -4,6 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"; // Import eye icons
 import { toast } from "react-toastify";
 import Navbar from "../components/shared/Navbar";
+import Logo from "../components/shared/logo";
 
 const Register = () => {
   const { createNewUser, setUser, updateUserProfile } = useContext(AuthContext);
@@ -50,9 +51,10 @@ const Register = () => {
 
   return (
     <div>
+      <Logo></Logo>
       <Navbar></Navbar>
-      <div className="min-h-screen flex justify-center items-center font-lora text-center">
-        <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none p-2 md:p-5 lg:p-10 shadow-xl">
+      <div className="min-h-screen flex justify-center items-center font-karla text-center">
+        <div className="card bg-background-color w-full max-w-lg shrink-0 rounded-none p-2 md:p-5 lg:p-10 shadow-xl">
           <h2 className="text-2xl md:text-4xl font-semibold">
             Register Your Account
           </h2>
@@ -65,7 +67,7 @@ const Register = () => {
                 name="name"
                 type="text"
                 placeholder="Your Name"
-                className="input input-bordered"
+                className="input input-bordered rounded-none"
                 required
               />
             </div>
@@ -77,7 +79,7 @@ const Register = () => {
                 name="email"
                 type="email"
                 placeholder="Your Email"
-                className="input input-bordered"
+                className="input input-bordered rounded-none"
                 required
               />
             </div>
@@ -89,7 +91,7 @@ const Register = () => {
                 name="photo"
                 type="text"
                 placeholder="Your Photo URL"
-                className="input input-bordered"
+                className="input input-bordered rounded-none"
                 required
               />
             </div>
@@ -101,7 +103,7 @@ const Register = () => {
                 name="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Your Password"
-                className="input input-bordered pr-10"
+                className="input input-bordered rounded-none pr-10"
                 required
               />
               <div className="relative">
@@ -119,13 +121,13 @@ const Register = () => {
               )}
             </div>
             <div className="form-control mt-6">
-              <button className="btn bg-navColor rounded-none">Register</button>
+              <button className="btn bg-banner-title hover:bg-hover-color text-white font-medium rounded-none">Register</button>
             </div>
           </form>
           <p className="text-sm md:text-base text-center font-semibold">
             Already Have An Account?
             <Link
-              className="text-sm md:text-base text-blue-500 hover:underline ml-1"
+              className="text-sm md:text-base text-hover-color hover:underline ml-1"
               to="/auth/login"
             >
               Login

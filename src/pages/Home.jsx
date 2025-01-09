@@ -4,13 +4,16 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import Navbar from "../components/shared/Navbar";
+import Logo from "../components/shared/logo";
+import "../css/custom-swiper-bullet.css";
 
 const Home = () => {
   const [recentQueries, setRecentQueries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const fetchRecentQueries = async () => {
@@ -31,26 +34,35 @@ const Home = () => {
 
   const sliderData = [
     {
-      image: "https://i.ibb.co/VqWBk8J/slider1.jpg",
-      title: "Make Informed Choices",
-      description: "Join our community in making ethical consumer decisions",
+      image:
+        "https://i.ibb.co.com/9gHxdk2/pexels-paula-schmidt-353488-963486.jpg",
+      title: "Comfort",
+      subtitle: "Stylish Seating",
+      description:
+        "Discover the perfect chairs to enhance your comfort and style for any room in your home.",
     },
     {
-      image: "https://i.ibb.co/0fnF4Yv/slider2.jpg",
-      title: "Support What Matters",
-      description: "Your purchases have power. Choose wisely with Selectify",
+      image:
+        "https://i.ibb.co.com/kMS2Y25/pexels-pixabay-276534.jpg",
+      title: "Elegance",
+      subtitle: "Modern Living",
+      description:
+        "Explore sleek and functional furniture options to transform your living space into a modern haven.",
     },
     {
-      image: "https://i.ibb.co/XkQvbR6/slider3.jpg",
-      title: "Community-Driven Insights",
-      description: "Learn from others' experiences and share your own",
+      image: "https://i.ibb.co.com/8BX4JvT/pexels-fotoaibe-1743229.jpg",
+      title: "Relaxation",
+      subtitle: "Cozy Bedrooms",
+      description:
+        "Create a restful sanctuary with thoughtfully recommended bedroom essentials.",
     },
   ];
 
   return (
     <div>
+      <Logo></Logo>
       <Navbar></Navbar>
-      <div className="container mx-auto px-4 py-8">
+      <div className="pb-8">
         {/* Slider Section */}
         <Swiper
           modules={[Autoplay, Navigation, Pagination]}
@@ -59,12 +71,12 @@ const Home = () => {
           autoplay={{ delay: 3000 }}
           navigation
           pagination={{ clickable: true }}
-          loop={true}
+          onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         >
           {sliderData.map((slide, index) => (
             <SwiperSlide key={index}>
               <div
-                className="relative h-[400px] rounded-lg overflow-hidden"
+                className="relative h-[300px] md:h-[600px] rounded-none overflow-hidden"
                 style={{
                   backgroundImage: `url(${slide.image})`,
                   backgroundSize: "cover",
@@ -72,24 +84,55 @@ const Home = () => {
                 }}
               >
                 <div className="absolute inset-0 bg-black opacity-40"></div>
-                <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-4">
+                <AnimatePresence>
+                <div className="absolute inset-0 flex flex-col justify-center items-center md:items-start text-white pl-0 md:pl-20">
+                  {/* Title Animation */}
                   <motion.h2
-                    className="text-3xl font-semibold"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
+                    className="text-2xl md:text-4xl text-center md:text-left text-banner-title font-karla font-normal tracking-widest"
+                    initial={{ y: -50, opacity: 0 }}
+                    animate={
+                      activeIndex === index
+                        ? { y: 0, opacity: 1 }
+                        : { opacity: 0 }
+                    }
+                    transition={{
+                      duration: 0.5,
+                      type: "spring",
+                      stiffness: 80,
+                    }}
                   >
                     {slide.title}
                   </motion.h2>
+
+                  {/* Subtitle Animation */}
+                  <motion.h3
+                    className="mt-2 md:mt-4 text-2xl md:text-5xl text-center md:text-left text-banner-title font-karla font-bold tracking-widest"
+                    initial={{ scale: 0 }}
+                    animate={
+                      activeIndex === index
+                        ? { scale: 1, opacity: 1 }
+                        : { scale: 0, opacity: 0 }
+                    }
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                  >
+                    {slide.subtitle}
+                  </motion.h3>
+
+                  {/* Description Animation */}
                   <motion.p
-                    className="mt-4 text-lg text-center"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.7 }}
+                    className="mt-2 md:mt-6 text-sm md:text-2xl text-center md:text-left text-background-color font-karla font-normal"
+                    initial={{ x: -100, opacity: 0 }}
+                    animate={
+                      activeIndex === index
+                        ? { x: 0, opacity: 1 }
+                        : { x: 100, opacity: 0 }
+                    }
+                    transition={{ duration: 0.7, delay: 0.5 }}
                   >
                     {slide.description}
                   </motion.p>
                 </div>
+                </AnimatePresence>
               </div>
             </SwiperSlide>
           ))}

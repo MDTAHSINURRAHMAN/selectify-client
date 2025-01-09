@@ -4,6 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Navbar from "../components/shared/Navbar";
+import Logo from "../components/shared/logo";
 
 const Login = () => {
   const { userLogin, signInWithGoogle, setUser } = useContext(AuthContext);
@@ -47,9 +48,10 @@ const Login = () => {
 
   return (
     <div>
+      <Logo></Logo>
       <Navbar></Navbar>
-      <div className="min-h-screen flex justify-center items-center font-lora text-center">
-        <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none p-2 md:p-5 lg:p-10 shadow-xl">
+      <div className="min-h-screen flex justify-center items-center font-karla text-center">
+        <div className="card bg-background-color w-full max-w-lg shrink-0 rounded-none p-2 md:p-5 lg:p-10 shadow-xl">
           <h2 className="text-2xl md:text-4xl font-semibold">
             Login Your Account
           </h2>
@@ -62,7 +64,7 @@ const Login = () => {
                 name="email"
                 type="email"
                 placeholder="email"
-                className="input input-bordered"
+                className="input input-bordered rounded-none"
                 required
               />
             </div>
@@ -74,7 +76,7 @@ const Login = () => {
                 name="password"
                 type="password"
                 placeholder="password"
-                className="input input-bordered"
+                className="input input-bordered rounded-none"
                 required
               />
               {error.login && (
@@ -93,13 +95,13 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-3">
-              <button className="btn bg-navColor rounded-none">Login</button>
+              <button className="btn bg-banner-title hover:bg-hover-color text-white font-medium rounded-none">Login</button>
             </div>
           </form>
           <div className="form-control px-8 mb-6">
             <button
               onClick={handleGoogleSignIn}
-              className="btn bg-btnColor text-white rounded-none"
+              className="btn bg-banner-title hover:bg-hover-color text-white font-medium rounded-none"
             >
               <FaGoogle /> Login With Google
             </button>
@@ -107,7 +109,7 @@ const Login = () => {
           <p className="text-sm md:text-base text-center font-semibold">
             Don't Have An Account?{" "}
             <Link
-              className="text-sm md:text-base text-blue-500 hover:underline ml-1"
+              className="text-sm md:text-base text-hover-color hover:underline ml-1"
               to="/auth/register"
             >
               Register
