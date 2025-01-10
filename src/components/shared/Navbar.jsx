@@ -6,68 +6,40 @@ import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const links = [
-    <li key={1}>
-      <NavLink
-        className={({ isActive }) =>
-          `tracking-widest text-md font-medium font-poppins ${
-            isActive ? "text-hover-color" : "text-black hover:text-hover-color"
-          }`
-        }
-        to="/"
-      >
-        Home
-      </NavLink>
-    </li>,
-    <li key={2}>
-      <NavLink
-        className={({ isActive }) =>
-          `tracking-widest text-md font-medium font-poppins ${
-            isActive ? "text-hover-color" : "text-black hover:text-hover-color"
-          }`
-        }
-        to="/queries"
-      >
-        Queries
-      </NavLink>
-    </li>,
-    <li key={3}>
-      <NavLink
-        className={({ isActive }) =>
-          `tracking-widest text-md font-medium font-poppins ${
-            isActive ? "text-hover-color" : "text-black hover:text-hover-color"
-          }`
-        }
-        to="/recommendations"
-      >
-        Recommendations for me
-      </NavLink>
-    </li>,
-    <li key={4}>
-      <NavLink
-        className={({ isActive }) =>
-          `tracking-widest text-md font-medium font-poppins ${
-            isActive ? "text-hover-color" : "text-black hover:text-hover-color"
-          }`
-        }
-        to="/my-queries"
-      >
-        My Queries
-      </NavLink>
-    </li>,
-    <li key={5}>
-      <NavLink
-        className={({ isActive }) =>
-          `tracking-widest text-md font-medium font-poppins ${
-            isActive ? "text-hover-color" : "text-black hover:text-hover-color"
-          }`
-        }
-        to="/my-recommendations"
-      >
-        My Recommendations
-      </NavLink>
-    </li>,
+    {
+      key: 1,
+      label: "Home",
+      to: "/",
+      isPublic: true,
+    },
+    {
+      key: 2,
+      label: "Queries",
+      to: "/queries",
+      isPublic: true,
+    },
+    {
+      key: 3,
+      label: "Recommendations for me",
+      to: "/recommendations",
+      isPublic: false,
+    },
+    {
+      key: 4,
+      label: "My Queries",
+      to: "/my-queries",
+      isPublic: false,
+    },
+    {
+      key: 5,
+      label: "My Recommendations",
+      to: "/my-recommendations",
+      isPublic: false,
+    },
   ];
 
+  // Filter links based on user authentication
+  const filteredLinks = links.filter((link) => link.isPublic || user);
   return (
     <div className="w-11/12 mx-auto navbar bg-base-100">
       <div className="navbar-start">
@@ -92,7 +64,22 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[9999] absolute left-0 top-full w-56 p-0 shadow"
           >
-            {links}
+            {filteredLinks.map((link) => (
+              <li key={link.key}>
+                <NavLink
+                  className={({ isActive }) =>
+                    `tracking-widest text-md font-medium font-poppins ${
+                      isActive
+                        ? "text-hover-color"
+                        : "text-black hover:text-hover-color"
+                    }`
+                  }
+                  to={link.to}
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </div>
         <Link
@@ -101,7 +88,24 @@ const Navbar = () => {
         ></Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal gap-5">{links}</ul>
+        <ul className="menu menu-horizontal gap-5">
+          {filteredLinks.map((link) => (
+            <li key={link.key}>
+              <NavLink
+                className={({ isActive }) =>
+                  `tracking-widest text-md font-medium font-poppins ${
+                    isActive
+                      ? "text-hover-color"
+                      : "text-black hover:text-hover-color"
+                  }`
+                }
+                to={link.to}
+              >
+                {link.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="navbar-end">
         {user && user?.email ? (
