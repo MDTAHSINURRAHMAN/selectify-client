@@ -9,6 +9,7 @@ import axios from "axios";
 import Navbar from "../components/shared/Navbar";
 import Logo from "../components/shared/logo";
 import "../css/custom-swiper-bullet.css";
+import Footer from "../components/shared/Footer";
 
 const Home = () => {
   const [recentQueries, setRecentQueries] = useState([]);
@@ -202,7 +203,7 @@ const Home = () => {
                   <div className="mt-6 text-center">
                     <a
                       href={`/queries`} // Adjust the URL path as per your routing logic
-                      className="px-4 py-2 bg-hover-color text-white font-semibold rounded-full shadow-md hover:bg-gray-100 hover:text-banner-title transition-all duration-300"
+                      className="px-4 py-2 bg-hover-color text-white font-semibold rounded-none shadow-md hover:bg-gray-100 hover:text-banner-title transition-all duration-300"
                     >
                       Read More
                     </a>
@@ -346,6 +347,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

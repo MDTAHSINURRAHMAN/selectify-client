@@ -4,6 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import Logo from "../components/shared/logo";
 import Navbar from "../components/shared/Navbar";
 import { motion } from "framer-motion";
+import Footer from "../components/shared/Footer";
 
 const Queries = () => {
   const [queries, setQueries] = useState([]);
@@ -37,7 +38,7 @@ const Queries = () => {
     <div>
       <Logo></Logo>
       <Navbar></Navbar>
-      <div className="min-h-screen font-poppins bg-gray-100">
+      <div>
         <div className="relative bg-banner-title text-white py-16 overflow-hidden">
           <motion.div
             className="container mx-auto px-4 text-center"
@@ -143,6 +144,7 @@ const Queries = () => {
         </div>
       </div>
       {/* Banner Section */}
+      <Footer></Footer>
     </div>
   );
 };

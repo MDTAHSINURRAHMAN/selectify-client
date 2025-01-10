@@ -5,6 +5,7 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"; // Import 
 import { toast } from "react-toastify";
 import Navbar from "../components/shared/Navbar";
 import Logo from "../components/shared/logo";
+import Footer from "../components/shared/Footer";
 
 const Register = () => {
   const { createNewUser, setUser, updateUserProfile } = useContext(AuthContext);
@@ -135,6 +136,7 @@ const Register = () => {
           </p>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

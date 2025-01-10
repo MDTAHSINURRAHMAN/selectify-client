@@ -5,6 +5,7 @@ import { FaGoogle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Navbar from "../components/shared/Navbar";
 import Logo from "../components/shared/logo";
+import Footer from "../components/shared/Footer";
 
 const Login = () => {
   const { userLogin, signInWithGoogle, setUser } = useContext(AuthContext);
@@ -117,6 +118,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
