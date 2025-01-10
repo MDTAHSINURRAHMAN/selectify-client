@@ -11,7 +11,7 @@ import AddQuery from "../pages/AddQuery";
 import QueryDetails from "../pages/QueryDetails";
 import UpdateQueryPage from "../pages/UpdateQueryPage";
 import Home from "../pages/Home";
-
+import Error from "../pages/Error";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +64,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/register",
     element: <Register></Register>,
+  },
+  {
+    path: "*",
+    element: <Error></Error>,
   },
 ]);
 
