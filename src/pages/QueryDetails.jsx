@@ -4,6 +4,8 @@ import { AuthContext } from "../providers/AuthProvider";
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
 import Logo from "../components/shared/logo";
+import Loading from "../components/shared/Loading";
+import { Helmet } from "react-helmet-async";
 
 const QueryDetails = () => {
   const [query, setQuery] = useState(null);
@@ -23,7 +25,7 @@ const QueryDetails = () => {
   useEffect(() => {
     const fetchQueryDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/query/${id}`);
+        const response = await fetch(`https://selectify-server-mu.vercel.app/query/${id}`);
         const data = await response.json();
         setQuery(data);
         setLoading(false);
@@ -61,7 +63,7 @@ const QueryDetails = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/recommendations", {
+      const response = await fetch("https://selectify-server-mu.vercel.app/recommendations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +74,7 @@ const QueryDetails = () => {
       if (response.ok) {
         // Update recommendation count
         await fetch(
-          `http://localhost:3000/query/${id}/increment-recommendations`,
+          `https://selectify-server-mu.vercel.app/query/${id}/increment-recommendations`,
           {
             method: "PATCH",
           }
@@ -97,7 +99,7 @@ const QueryDetails = () => {
     const fetchRecommendations = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/recommendations/${id}`
+          `https://selectify-server-mu.vercel.app/recommendations/${id}`
         );
         const data = await response.json();
         // Sort recommendations by timestamp descending
@@ -127,6 +129,10 @@ const QueryDetails = () => {
 
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Helmet>
+          <title>Query Details | Selectify</title>
+          <meta name="description" content="Recommendations page of Selectify" />
+        </Helmet>
         {recommendations.map((rec) => (
           <div
             key={rec._id}
@@ -195,7 +201,7 @@ const QueryDetails = () => {
   };
 
   if (loading) {
-    return <div className="text-center mt-8">Loading...</div>;
+    return <Loading></Loading>;
   }
 
   if (!query) {

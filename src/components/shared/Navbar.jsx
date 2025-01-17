@@ -111,21 +111,6 @@ const Navbar = () => {
         {user && user?.email ? (
           <div className="flex gap-3 items-center">
             <div className="relative group w-8 md:w-10 h-8 md:h-10">
-              {/* User Image or Icon */}
-              {user?.photoURL ? (
-                <img
-                  className="w-full h-full object-cover rounded-full"
-                  src={user.photoURL}
-                  alt="User Avatar"
-                />
-              ) : (
-                <FaUser className="w-10 h-10 rounded-full text-gray-500" />
-              )}
-
-              {/* Display Name */}
-              <span className="absolute hidden group-hover:flex items-center justify-center top-9 left-0 text-black text-sm font-semibold rounded-lg px-2 py-1 z-[9999]">
-                {user?.displayName}
-              </span>
             </div>
 
             {/* Logout Button */}

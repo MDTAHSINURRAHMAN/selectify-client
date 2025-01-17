@@ -4,6 +4,7 @@ import Logo from "../components/shared/logo";
 import Navbar from "../components/shared/Navbar";
 import { motion } from "framer-motion";
 import Footer from "../components/shared/Footer";
+import { Helmet } from "react-helmet-async";
 
 const UpdateQueryPage = () => {
   const { id } = useParams(); // Get the query ID from the URL
@@ -18,7 +19,7 @@ const UpdateQueryPage = () => {
 
   useEffect(() => {
     // Fetch the existing query details from the backend
-    fetch(`http://localhost:3000/my-queries/${id}`)
+    fetch(`https://selectify-server-mu.vercel.app/my-queries/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setQuery(data);
@@ -40,7 +41,7 @@ const UpdateQueryPage = () => {
     e.preventDefault();
 
     // Send the updated data to the backend using fetch
-    fetch(`http://localhost:3000/query/${id}`, {
+    fetch(`https://selectify-server-mu.vercel.app/query/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -65,6 +66,10 @@ const UpdateQueryPage = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Update Query | Selectify</title>
+        <meta name="description" content="Update query page of Selectify" />
+      </Helmet>
       <Logo></Logo>
       <Navbar></Navbar>
       <div className="relative bg-banner-title text-white py-16 overflow-hidden">

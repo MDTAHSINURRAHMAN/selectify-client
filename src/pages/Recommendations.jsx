@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Logo from "../components/shared/logo";
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
+import { Helmet } from "react-helmet-async";
 
 const Recommendations = () => {
   const [recommendations, setRecommendations] = useState([]);
@@ -14,7 +15,7 @@ const Recommendations = () => {
     const fetchRecommendations = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/recommendations-for-my-queries/${user?.email}`
+          `https://selectify-server-mu.vercel.app/recommendations-for-my-queries/${user?.email}`
         );
         const data = await response.json();
         setRecommendations(data);
@@ -32,6 +33,10 @@ const Recommendations = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Recommendations | Selectify</title>
+        <meta name="description" content="Recommendations page of Selectify" />
+      </Helmet>
       <Logo></Logo>
       <Navbar></Navbar>
       <div className="relative bg-banner-title text-white py-16 overflow-hidden">

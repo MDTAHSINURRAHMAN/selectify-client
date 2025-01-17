@@ -5,6 +5,7 @@ import Logo from "../components/shared/logo";
 import Navbar from "../components/shared/Navbar";
 import { motion } from "framer-motion";
 import Footer from "../components/shared/Footer";
+import { Helmet } from "react-helmet-async";
 
 const MyQueries = () => {
   const [queries, setQueries] = React.useState([]);
@@ -16,7 +17,7 @@ const MyQueries = () => {
     const fetchQueries = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/my-queries/${user.email}`
+          `https://selectify-server-mu.vercel.app/my-queries/${user.email}`
         );
         const data = await response.json();
         setQueries(data);
@@ -35,7 +36,7 @@ const MyQueries = () => {
     );
     if (confirmed) {
       try {
-        const response = await fetch(`http://localhost:3000/query/${id}`, {
+        const response = await fetch(`https://selectify-server-mu.vercel.app/query/${id}`, {
           method: "DELETE",
         });
         if (response.ok) {
@@ -57,6 +58,10 @@ const MyQueries = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Queries | Selectify</title>
+        <meta name="description" content="My queries page of Selectify" />
+      </Helmet>
       <Logo></Logo>
       <Navbar></Navbar>
       <div className="min-h-screen bg-gray-100">
@@ -108,7 +113,7 @@ const MyQueries = () => {
               </h2>
               <button
                 onClick={() => navigate("/add-query")}
-                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
+                className="bg-gradient-to-r from-banner-title to-hover-color hover:from-hover-color hover:to-banner-title text-white font-bold py-3 px-6 rounded-none shadow-lg transform transition duration-300 hover:scale-105"
               >
                 Add Your First Query
               </button>

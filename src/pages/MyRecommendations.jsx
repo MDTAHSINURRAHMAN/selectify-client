@@ -6,6 +6,7 @@ import Logo from "../components/shared/logo";
 import Navbar from "../components/shared/Navbar";
 import { motion } from "framer-motion";
 import Footer from "../components/shared/Footer";
+import { Helmet } from "react-helmet-async";
 
 const MyRecommendations = () => {
   const [recommendations, setRecommendations] = useState([]);
@@ -16,7 +17,7 @@ const MyRecommendations = () => {
     const fetchMyRecommendations = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/my-recommendations/${user?.email}`
+          `https://selectify-server-mu.vercel.app/my-recommendations/${user?.email}`
         );
         const data = await response.json();
         setRecommendations(data);
@@ -41,7 +42,7 @@ const MyRecommendations = () => {
       try {
         // Delete the recommendation
         const deleteResponse = await fetch(
-          `http://localhost:3000/recommendations/${id}`,
+          `https://selectify-server-mu.vercel.app/recommendations/${id}`,
           {
             method: "DELETE",
           }
@@ -50,7 +51,7 @@ const MyRecommendations = () => {
         if (deleteResponse.ok) {
           // Decrease recommendation count for the query
           await fetch(
-            `http://localhost:3000/query/${queryId}/decrement-recommendations`,
+            `https://selectify-server-mu.vercel.app/query/${queryId}/decrement-recommendations`,
             {
               method: "PATCH",
             }
@@ -69,6 +70,10 @@ const MyRecommendations = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Recommendations | Selectify</title>
+        <meta name="description" content="My recommendations page of Selectify" />
+      </Helmet>
       <Logo></Logo>
       <Navbar></Navbar>
       <div className="relative bg-banner-title text-white py-16 overflow-hidden">

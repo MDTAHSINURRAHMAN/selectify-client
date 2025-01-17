@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Navbar from "../components/shared/Navbar";
 import Logo from "../components/shared/logo";
 import Footer from "../components/shared/Footer";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const { createNewUser, setUser, updateUserProfile } = useContext(AuthContext);
@@ -52,6 +53,10 @@ const Register = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Register | Selectify</title>
+        <meta name="description" content="Register page of Selectify" />
+      </Helmet>
       <Logo></Logo>
       <Navbar></Navbar>
       <div className="min-h-screen flex justify-center items-center font-karla text-center">

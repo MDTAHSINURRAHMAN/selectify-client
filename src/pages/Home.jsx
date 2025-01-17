@@ -10,7 +10,8 @@ import Navbar from "../components/shared/Navbar";
 import Logo from "../components/shared/logo";
 import "../css/custom-swiper-bullet.css";
 import Footer from "../components/shared/Footer";
-
+import FeaturesSection from "../components/Features";
+import { Helmet } from "react-helmet-async";
 const Home = () => {
   const [recentQueries, setRecentQueries] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     const fetchRecentQueries = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/all-queries");
+        const response = await axios.get("https://selectify-server-mu.vercel.app/all-queries");
         const sortedQueries = response.data.sort(
           (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
         );
@@ -60,6 +61,10 @@ const Home = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Home | Selectify</title>
+        <meta name="description" content="Home page of Selectify" />
+      </Helmet>
       <Logo></Logo>
       <Navbar></Navbar>
       <div className="pb-8">
@@ -216,6 +221,9 @@ const Home = () => {
 
         {/* Decorative Stats Section */}
         <div className="px-10 sm:px-6 lg:px-8 py-12 rounded-none">
+          <h2 className="text-4xl font-karla font-bold mb-8 text-center text-gray-800">
+            Statistics
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Total Queries Card */}
             <motion.div
@@ -346,6 +354,8 @@ const Home = () => {
             </motion.div>
           </div>
         </div>
+
+        <FeaturesSection></FeaturesSection>
       </div>
       <Footer></Footer>
     </div>

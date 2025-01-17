@@ -5,6 +5,7 @@ import Logo from "../components/shared/logo";
 import Navbar from "../components/shared/Navbar";
 import { motion } from "framer-motion";
 import Footer from "../components/shared/Footer";
+import { Helmet } from "react-helmet-async";
 
 const AddQuery = () => {
   const [formData, setFormData] = React.useState({
@@ -38,7 +39,7 @@ const AddQuery = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/add-query", {
+      const response = await fetch("https://selectify-server-mu.vercel.app//add-query", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,6 +57,10 @@ const AddQuery = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Add Query | Selectify</title>
+        <meta name="description" content="Add a new product query" />
+      </Helmet>
       <Logo></Logo>
       <Navbar></Navbar>
       <div className="relative bg-banner-title text-white py-16 overflow-hidden">
