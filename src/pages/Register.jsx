@@ -53,6 +53,7 @@ const Register = () => {
 
   return (
     <div>
+      {/* Helmet */}
       <Helmet>
         <title>Register | Selectify</title>
         <meta name="description" content="Register page of Selectify" />
