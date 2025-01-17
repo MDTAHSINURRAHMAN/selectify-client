@@ -38,7 +38,7 @@ const Queries = () => {
     }
   }, [user]);
 
-  // Filter queries based on search text
+  // Filter queries 
   const filteredQueries = queries.filter((query) =>
     query.productName.toLowerCase().includes(searchText.toLowerCase())
   );
