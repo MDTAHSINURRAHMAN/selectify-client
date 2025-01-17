@@ -6,6 +6,7 @@ import Footer from "../components/shared/Footer";
 import Logo from "../components/shared/logo";
 import Loading from "../components/shared/Loading";
 import { Helmet } from "react-helmet-async";
+import toast from 'react-hot-toast';
 
 const QueryDetails = () => {
   const [query, setQuery] = useState(null);
@@ -14,6 +15,7 @@ const QueryDetails = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  
 
   const [recommendation, setRecommendation] = useState({
     recommendationTitle: "",
@@ -80,7 +82,7 @@ const QueryDetails = () => {
           }
         );
 
-        alert("Recommendation added successfully!");
+        toast.success("Recommendation added successfully!");
         setRecommendation({
           recommendationTitle: "",
           recommendedProductName: "",
@@ -89,8 +91,7 @@ const QueryDetails = () => {
         });
       }
     } catch (error) {
-      console.error("Error adding recommendation:", error);
-      alert("Failed to add recommendation");
+      toast.error("Failed to add recommendation");
     }
   };
 
@@ -108,7 +109,7 @@ const QueryDetails = () => {
         );
         setRecommendations(sortedRecommendations);
       } catch (error) {
-        console.error("Error fetching recommendations:", error);
+        toast.error("Error fetching recommendations");
       }
     };
 

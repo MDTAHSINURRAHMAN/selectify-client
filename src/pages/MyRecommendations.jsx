@@ -23,7 +23,7 @@ const MyRecommendations = () => {
         setRecommendations(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching recommendations:", error);
+        toast.error("Error fetching recommendations");
         setLoading(false);
       }
     };
@@ -62,7 +62,6 @@ const MyRecommendations = () => {
           toast.success("Recommendation deleted successfully");
         }
       } catch (error) {
-        console.error("Error deleting recommendation:", error);
         toast.error("Failed to delete recommendation");
       }
     }

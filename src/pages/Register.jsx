@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"; // Import eye icons
-import { toast } from "react-toastify";
 import Navbar from "../components/shared/Navbar";
 import Logo from "../components/shared/logo";
 import Footer from "../components/shared/Footer";
 import { Helmet } from "react-helmet-async";
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const { createNewUser, setUser, updateUserProfile } = useContext(AuthContext);

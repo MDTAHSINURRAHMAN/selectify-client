@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Footer from "../components/shared/Footer";
 import { FaSearch, FaThLarge, FaThList, FaTh } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import toast from 'react-hot-toast';
 
 const Queries = () => {
   const [queries, setQueries] = useState([]);
@@ -38,7 +39,7 @@ const Queries = () => {
     }
   }, [user]);
 
-  // Filter queries 
+  // Filter queries based on search text
   const filteredQueries = queries.filter((query) =>
     query.productName.toLowerCase().includes(searchText.toLowerCase())
   );

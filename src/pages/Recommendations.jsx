@@ -5,6 +5,7 @@ import Logo from "../components/shared/logo";
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
 import { Helmet } from "react-helmet-async";
+import toast from 'react-hot-toast';
 
 const Recommendations = () => {
   const [recommendations, setRecommendations] = useState([]);

@@ -27,7 +27,7 @@ const Home = () => {
         setRecentQueries(sortedQueries.slice(0, 6));
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching queries:", error);
+        toast.error("Error fetching queries");
         setLoading(false);
       }
     };

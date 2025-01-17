@@ -6,6 +6,7 @@ import Navbar from "../components/shared/Navbar";
 import { motion } from "framer-motion";
 import Footer from "../components/shared/Footer";
 import { Helmet } from "react-helmet-async";
+import toast from 'react-hot-toast';
 
 const AddQuery = () => {
   const [formData, setFormData] = React.useState({
@@ -51,7 +52,7 @@ const AddQuery = () => {
         navigate("/my-queries");
       }
     } catch (error) {
-      console.error("Error adding query:", error);
+      toast.error("Error adding query");
     }
   };
 

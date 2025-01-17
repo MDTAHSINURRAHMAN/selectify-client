@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
-import { toast } from "react-toastify";
 import Navbar from "../components/shared/Navbar";
 import Logo from "../components/shared/logo";
 import Footer from "../components/shared/Footer";
 import { Helmet } from "react-helmet-async";
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const { userLogin, signInWithGoogle, setUser } = useContext(AuthContext);
@@ -27,11 +27,11 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
-        toast.success("Login successful! Welcome back!");
+        toast.success('Successfully logged in!');
         navigate(location?.state ? location.state : "/");
       })
       .catch(() => {
-        toast.error("Invalid Email or Password");
+        toast.error(error.message || 'Failed to login');
       });
   };
 

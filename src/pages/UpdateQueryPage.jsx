@@ -5,6 +5,7 @@ import Navbar from "../components/shared/Navbar";
 import { motion } from "framer-motion";
 import Footer from "../components/shared/Footer";
 import { Helmet } from "react-helmet-async";
+import toast from 'react-hot-toast';
 
 const UpdateQueryPage = () => {
   const { id } = useParams(); // Get the query ID from the URL
@@ -25,7 +26,7 @@ const UpdateQueryPage = () => {
         setQuery(data);
       })
       .catch((error) => {
-        console.error("Error fetching query data:", error);
+        toast.error("Error fetching query data");
       });
   }, [id]);
 
@@ -59,8 +60,7 @@ const UpdateQueryPage = () => {
         navigate("/queries"); // Redirect to the queries list page
       })
       .catch((error) => {
-        console.error("Error updating query:", error);
-        alert("Error updating query");
+        toast.error("Error updating query");
       });
   };
 

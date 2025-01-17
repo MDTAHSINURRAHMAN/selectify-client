@@ -6,6 +6,7 @@ import Navbar from "../components/shared/Navbar";
 import { motion } from "framer-motion";
 import Footer from "../components/shared/Footer";
 import { Helmet } from "react-helmet-async";
+import toast from 'react-hot-toast';
 
 const MyQueries = () => {
   const [queries, setQueries] = React.useState([]);
@@ -23,7 +24,7 @@ const MyQueries = () => {
         setQueries(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching queries:", error);
+        toast.error("Error fetching queries");
         setLoading(false);
       }
     };
@@ -43,7 +44,7 @@ const MyQueries = () => {
           setQueries(queries.filter((query) => query._id !== id));
         }
       } catch (error) {
-        console.error("Error deleting query:", error);
+        toast.error("Error deleting query");
       }
     }
   };
